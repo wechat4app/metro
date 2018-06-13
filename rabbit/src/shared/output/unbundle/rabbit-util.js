@@ -15,8 +15,13 @@ exports.transform = function (bundle, option) {
     //InitializeCore模块Id
     let InitializeCoreId = -1;
     //目标入口Id
-    let lazyId = option.lazyId || '5858';
+    let lazyId = option.rabbitId || '5858';
     
+    //判断lazyId是否小于模块数
+    if(parseInt(lazyId, 10) <= (bundle.startupModules.length + bundle.lazyModules.length) ){
+        console.log('FAILD: The rabbit id is smaller than modules number');
+        return;
+    }
 
     for (var i = 0; i < bundle.lazyModules.length; i++) {
         //如果是InitializeCore模块，记录ID用于最后生成调用；

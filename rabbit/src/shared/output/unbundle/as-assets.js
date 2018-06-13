@@ -58,7 +58,7 @@ log)
   log('Writing bundle output to:', bundleOutput);
   const modulesDir = path.join(path.dirname(bundleOutput), MODULES_DIR);
   const writeUnbundle = Promise.all([
-  writeFile(bundleOutput + '.base.js';, startupCode, encoding),
+  writeFile(bundleOutput + '.base.js', startupCode, encoding),
   writeFile(bundleOutput, lazyCode, encoding)]);
 
 
