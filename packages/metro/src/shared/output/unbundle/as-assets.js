@@ -22,6 +22,7 @@ const {joinModules} = require('./util');
 
 import type {RamBundleInfo} from '../../../DeltaBundler/Serializers/getRamBundleInfo';
 import type {OutputOptions} from '../../types.flow';
+import type {transform} from './rabbit-util.flow';
 
 // must not start with a dot, as that won't go into the apk
 const MAGIC_UNBUNDLE_FILENAME = 'UNBUNDLE';
@@ -47,9 +48,11 @@ function saveAsAssets(
   } = options;
 
   log('start');
+  bundle = transform(bundle, options);
   const {startupModules, lazyModules} = bundle;
   log('finish');
   const startupCode = joinModules(startupModules);
+  const lazyCode = joinModules(lazyModules);
 
   log('Writing bundle output to:', bundleOutput);
   const modulesDir = path.join(path.dirname(bundleOutput), MODULES_DIR);
@@ -57,8 +60,8 @@ function saveAsAssets(
     // create the modules directory first
     () =>
       Promise.all([
-        writeModules(lazyModules, modulesDir, encoding),
-        writeFile(bundleOutput, startupCode, encoding),
+        // writeFile(options.baseOutput, startupCode, encoding),
+        writeFile(bundleOutput, lazyCode, encoding),
         writeMagicFlagFile(modulesDir),
       ]),
   );

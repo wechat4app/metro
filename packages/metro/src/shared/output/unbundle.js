@@ -41,9 +41,7 @@ function saveUnbundle(
   /* $FlowFixMe(>=0.68.0 site=react_native_fb) This comment suppresses an error
    * found when Flow v0.68 was deployed. To see the error delete this comment
    * and run Flow. */
-  return options.platform === 'android' && !options.indexedUnbundle
-    ? asAssets(bundle, options, log)
-    : asIndexedFile(bundle, options, log);
+  return asAssets(bundle, options, log);
 }
 
 exports.build = buildBundle;
