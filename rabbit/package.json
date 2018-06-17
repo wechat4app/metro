@@ -1,5 +1,5 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.8",
   "name": "rabbit-bundler",
   "description": "The JavaScript bundler for React Native, forked on Facebook metro.",
   "main": "src/index.js",
